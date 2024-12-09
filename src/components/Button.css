@@ -6,24 +6,24 @@
 }
 
 .button {
-    padding: 10px 20px; /* Adds space inside the button */
-    font-size: 16px; /* Sets a readable font size */
-    font-weight: bold; /* Makes the text stand out */
-    color: white; /* Button text color */
-    background-color: #007bff; /* Button background color */
-    border: none; /* Removes default border */
-    border-radius: 5px; /* Rounds the corners slightly */
-    cursor: pointer; /* Shows a pointer cursor on hover */
-    text-align: center; /* Centers the text inside */
-    text-decoration: none; /* Removes underline from the text */
-    transition: background-color 0.3s ease; /* Adds a smooth hover effect */
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold; 
+    color: white;
+    background-color: #4CAF50;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-align: center; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #0056b3; /* Darkens the background on hover */
+    background-color: #45a049;
 }
 
 .button:active {
-    background-color: #003f7f; /* Further darkens on click */
-    transform: scale(0.98); /* Adds a subtle "pressed" effect */
+    background-color: #007f06; 
+    transform: scale(0.98);
 }
