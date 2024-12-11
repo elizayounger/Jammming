@@ -1,10 +1,10 @@
 import React from "react";
 import "./Searchbar.css";
 
-export default function Searchbar() {
+export default function Searchbar({ search, changeHandler, onSubmit }) {
     return (<div className="Searchbar">
-        <form>
-            <input type="search" name="search" placeholder="Enter your search here"/>
+        <form onSubmit={onSubmit} >
+            <input type="search" name="search" placeholder="Enter your search here" value={search} onChange={changeHandler} />
             <button className="searchButton">SEARCH</button>
         </form>
     </div>);
