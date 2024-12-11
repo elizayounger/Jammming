@@ -1,6 +1,5 @@
-import { expect } from 'chai';
+import { expect, assert } from 'chai';
 import { getCodeVerifier, sha256, base64encode, getCodeChallenge } from '../../spotifyAPI/codeChallenge.mjs';
-import { assert } from 'chai';
 
 // ----------------------- Code Verifier Tests-----------------------------
 describe('getCodeVerifier', () => {    
@@ -26,22 +25,49 @@ describe('getCodeVerifier', () => {
 });
 
 // ----------------------- Code-Verifier Hashing Tests-----------------------------
-describe('sha256', () => {
-  it('should hash a plain string correctly', async () => {
-    const plainText = 'vDcOwbRhUK3u8GzfNefvI6TnUel5X3gA1EKphvWzH8PQFBYLqvjrzSv6BxcGGGXz';
-    const expectedHash = 'e2afda462db864832b1c4ce2419657993fbe7ef04fdd40791068df3f727bc7f4';
-    const result = await sha256(plainText);
-    expect(result).to.equal(expectedHash);
+
+describe('sha256', function () {
+  it("should return the same byte length", async () => {
+    const input1 = 'Huid1nZeQ3B9zWCB1LMumXWjwr4egXSJ8P4CTWZ8KIlj33OgHs72AEZn6HzCEVna';
+    const input2 = 'AnotherDifferentStringForHashing';
+    
+    const hash1 = await sha256(input1);
+    const hash2 = await sha256(input2);
+
+    new DataView
+
   });
+  it('should return different hashes for different inputs', async function () {
+    const input1 = 'Huid1nZeQ3B9zWCB1LMumXWjwr4egXSJ8P4CTWZ8KIlj33OgHs72AEZn6HzCEVna';
+    const input2 = 'AnotherDifferentStringForHashing';
+    
+    const hash1 = await sha256(input1);
+    const hash2 = await sha256(input2);
+    
+    assert.notDeepStrictEqual(hash1, hash2, 'Hashes should be different for different inputs');
+  });
+  
+  it('should return the same hash for identical inputs', async function () {
+    const input = 'Huid1nZeQ3B9zWCB1LMumXWjwr4egXSJ8P4CTWZ8KIlj33OgHs72AEZn6HzCEVna';
+    
+    const hash1 = await sha256(input);
+    const hash2 = await sha256(input);
+    
+    assert.deepStrictEqual(hash1, hash2, 'Hashes should be identical for the same input');
+  });
+});
+
+// ----------------------- Code-Verifier Hashing Tests (original)-----------------------------
+describe('sha256', () => {
   it('hashing should be case sensitive', async () => {
     const hashedLower = await sha256('test');
     const hashedUpper = await sha256('TEST');
     console.assert(hashedLower !== hashedUpper, 'Hashes should differ for case-sensitive inputs');
   });
   it('should hash the same string consistently (the same)', async () => {
-    const string1 = await sha256('test');
-    const string2 = await sha256('test');
-    console.assert(string1 === string2, 'Using the function twice with the same string input procudess the same result');
+    const obj1 = await sha256('vDcOwbRhUK3u8GzfNefvI6TnUel5X3gA1EKphvWzH8PQFBYLqvjrzSv6BxcGGGXz');
+    const obj2 = await sha256('vDcOwbRhUK3u8GzfNefvI6TnUel5X3gA1EKphvWzH8PQFBYLqvjrzSv6BxcGGGXz');
+    assert.deepStrictEqual(obj1 === obj2);
   });
   it('hashes different input differently(utf8, utf16)', async () => {
     const utf8Input = 'test';

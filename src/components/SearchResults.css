@@ -1,0 +1,38 @@
+.searchResults {
+    flex: 1;
+    margin: 10px;
+    padding-top: 0.5rem;
+    height: 66vh;
+    max-width: 35%;
+    min-width:300px;
+    background-color: white;
+    border-radius: 2%;
+}
+.resultsTabs {
+    display: flex;
+    /* gap: 5px; */
+    width: 90%;
+    justify-content: space-around;
+    margin: auto;
+    margin-top: 5px;
+}
+.tab {
+    font-size: 1rem;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    text-align: center;
+    line-height: 2rem;
+    width: 50%;
+    background-color: white;
+}
+.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+.songResults {
+    padding-bottom: 10px;
+    width: 90%;
+    height: 80%;
+    margin: auto;
+    overflow: scroll;
+}
