@@ -1,0 +1,23 @@
+.song {
+    display: flex;
+    flex-wrap: nowrap;
+    border-top: 1px solid green;
+    width: 100%;
+    align-items: center;
+}
+.songDetails {
+    flex: 8;
+    text-align: left;
+    padding: 5px;
+}
+.icon {
+    flex: 1;
+}
+.artist, .songName {
+    margin: 0; 
+    margin-top: 3px; 
+    margin-bottom: 3px; 
+}
+.songName {
+    font-weight: bold;
+}
