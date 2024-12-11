@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./components/Header.js";
 import Searchbar from "./components/Searchbar.js";
 import SearchResults from "./components/SearchResults.js";
+import PlaylistCreator from "./components/PlaylistCreator.js";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       < Searchbar />
       <div className="resultsAndPlaylistContainer">
         < SearchResults />
-        < SearchResults />
+        < PlaylistCreator />
       </div>
     </div>
   );
