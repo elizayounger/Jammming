@@ -23,8 +23,8 @@
 }
 /* Basic styling for the SVG */
 svg {
-    width: 50px; /* Set desired width */
-    height: 50px; /* Set desired height */
+    width: 10%; /* Set desired width */
+    /* height: 50px;  */
     fill: #5f6368; /* Set fill color */
     transition: transform 0.3s, fill 0.3s; /* Smooth transition for hover effects */
 }

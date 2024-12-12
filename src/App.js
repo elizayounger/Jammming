@@ -13,10 +13,10 @@ function App() {
 // -------------------------------------------Search Results (API)-------------------------------------------
    
    const mockAPIList = [
-      { songName: "Hello", artist: "Adele" },
-      { songName: "Mamma Mia", artist: "Abba" },
-      { songName: "Wagon Wheel", artist: "Bodega" },
-      { songName: "Save a horse ride a cowboy", artist: "Who Knows" },
+      { spotifyId:"001", songName: "Hello", artist: "Adele" },
+      { ispotifyIdd:"002", songName: "Mamma Mia", artist: "Abba" },
+      { spotifyId:"003", songName: "Wagon Wheel", artist: "Bodega" },
+      { spotifyId:"004", songName: "Save a horse ride a cowboy", artist: "Who Knows" },
    ];
 
    const [searchResults, makeSearch] = useState(mockAPIList);
@@ -24,10 +24,10 @@ function App() {
 // -------------------------------------------new Playlist-------------------------------------------
 
    const mockNewPlaylist = [
-      { songName: "Heavy is the Crown", artist: "Mike Shinoda" },
-      { songName: "JOYRIDE", artist: "Kesha" },
-      { songName: "Good Bi", artist: "Beth McCarthy" },
-      { songName: "Wide Open Spaces", artist: "The Chicks" },
+      { spotifyId:"005", songName: "Heavy is the Crown", artist: "Mike Shinoda" },
+      { spotifyId:"006", songName: "JOYRIDE", artist: "Kesha" },
+      { spotifyId:"007", songName: "Good Bi", artist: "Beth McCarthy" },
+      { spotifyId:"008", songName: "Wide Open Spaces", artist: "The Chicks" },
    ];
 
    const [newPlaylist, setNewPlaylist] = useState(mockNewPlaylist);

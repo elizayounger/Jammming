@@ -6,7 +6,7 @@ export default function PlaylistBuilder({ newPlaylistName, handlePlaylistNameCha
 
     const playlistItems = newPlaylist.map((song, index) => (
         <li key={index}>
-            <Song songName={song.songName} artist={song.artist} plusOperator={false} />
+            <Song spotifyId={song.spotifyId} songName={song.songName} artist={song.artist} plusOperator={false} />
         </li>
     ));
 
