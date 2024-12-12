@@ -2,18 +2,13 @@ import React from "react";
 import "./SearchResults.css";
 import Song from "./Song.js";
 
-export default function SearchResults({ resultsList = [] }) {
-    const songList = resultsList.length ? (
-        resultsList.map((song, index) => (
-            <Song
-                key={index}
-                songName={song.songName}
-                artist={song.artist}
-            />
-        ))
-    ) : (
-        <p className="noResults">No results found</p>
-    );
+export default function SearchResults({resultsList=[]}) {
+    
+    const songList = resultsList.map((song, index) => (
+        <li key={index}>
+            <Song songName={song.songName} artist={song.artist} />
+        </li>
+    ));
 
     return (
         <section className="searchResults">
@@ -23,7 +18,9 @@ export default function SearchResults({ resultsList = [] }) {
             </div>
 
             <div className="songResults">
-                <ul>{songList}</ul>
+                <ul>
+                    {songList.length > 0 ? songList : <li>No results found.</li>}
+                </ul>
             </div>
         </section>
     );

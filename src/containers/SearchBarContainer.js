@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import Searchbar from "../components/Searchbar.js";
 
-const GUINEAPATHS = [
-  "https://content.codecademy.com/courses/React/react_photo-guineapig-1.jpg",
-  "https://content.codecademy.com/courses/React/react_photo-guineapig-2.jpg",
-  "https://content.codecademy.com/courses/React/react_photo-guineapig-3.jpg",
-  "https://content.codecademy.com/courses/React/react_photo-guineapig-4.jpg",
-];
 
 export default function SearchbarContainer() {
 
@@ -16,13 +10,13 @@ export default function SearchbarContainer() {
         setSearch(target.value);
     }
 
-    const resetFavoriteHandler = () => {
+    const handleSubmit = () => {
         setSearch("");
     }
 
 	return (
     <>
-      < Searchbar search={search} changeHandler={onChangeHandler} onSubmit={resetFavoriteHandler} />
+      < Searchbar search={search} changeHandler={onChangeHandler} onSubmit={handleSubmit} />
     </>
   );
 };

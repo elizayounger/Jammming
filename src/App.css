@@ -5,8 +5,18 @@
   justify-content: center;
   align-items: center;
   background-color: #4CAF50;
+  background-image: url("./resources/images/colorful-music.webp");
+  background-size: cover; /* Ensure the image covers the entire screen */
+  background-position: center; /* Center the image */
+  background-attachment: fixed; /* Create a parallax effect */
+  
+  /* Optional Gradient Overlay */
+  background-blend-mode: overlay; /* Blend the image with the overlay color */
 }
 /* ---------------------------------- */
+* {
+  transition: all 0.3s ease-in-out; 
+}
 .App {
   text-align: center;
 }
