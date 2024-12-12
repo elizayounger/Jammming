@@ -8,4 +8,4 @@ export default function Searchbar({ search, changeHandler, onSubmit }) {
             <button className="searchButton">SEARCH</button>
         </form>
     </div>);
-}
+};

@@ -19,9 +19,9 @@
 .playlistSongs {
     padding-bottom: 10px;
     width: 90%;
-    height: 80%;
+    height: 78%;
     margin: auto;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .playlistName {
     flex: 5;
