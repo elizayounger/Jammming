@@ -1,7 +1,28 @@
 import React from 'react';
 import "./Song.css";
 
-export default function Song({songName="SONG NAME", artist="Artist"}) {
+export default function Song({songName="SONG NAME", artist="Artist", plusOperator=true}) {
+    const addIcon = (<svg //add
+        className="icon"
+        xmlns="http://www.w3.org/2000/svg" 
+        height="34px" 
+        viewBox="0 -960 960 960" 
+        width="24px" 
+        fill="#5f6368"
+    >
+        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/>
+    </svg>);
+    const subtractIcon = (<svg // subtract
+        className="icon"
+        xmlns="http://www.w3.org/2000/svg" 
+        height="24px" 
+        viewBox="0 -960 960 960" 
+        width="24px" 
+        fill="#5f6368"
+    >
+        <path d="M200-440v-80h560v80H200Z"/>
+    </svg>);
+
     return (<div className="song">
         <svg 
             className="icon"
@@ -19,15 +40,7 @@ export default function Song({songName="SONG NAME", artist="Artist"}) {
             <p className="artist">{artist}</p>
         </div>
 
-        <svg 
-            className="icon"
-            xmlns="http://www.w3.org/2000/svg" 
-            height="34px" 
-            viewBox="0 -960 960 960" 
-            width="24px" 
-            fill="#5f6368"
-        >
-            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/>
-        </svg>
+        {plusOperator ? addIcon : subtractIcon}
+
     </div>);
 }

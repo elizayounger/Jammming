@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import Searchbar from "../components/Searchbar.js";
 
 
-export default function SearchbarContainer() {
+export default function SearchbarContainer({ userSearch , setUserSearch, makeSearch }) {
 
-    const [search, setSearch] = useState(""); // state variable
+   const onChangeHandler = ({target}) => {
+      setUserSearch(target.value);
+   }
 
-    const onChangeHandler = ({target}) => { // when anything happens in the input
-        setSearch(target.value);
-    }
+   const handleSubmit = () => {
+      // call the api and input the 
+      // makeSearch(searchAPI(userSearch));
+      setUserSearch("");
+   }
 
-    const handleSubmit = () => {
-        setSearch("");
-    }
-
-	return (
-    <>
-      < Searchbar search={search} changeHandler={onChangeHandler} onSubmit={handleSubmit} />
-    </>
-  );
+   return (
+      <>
+         < Searchbar search={userSearch} changeHandler={onChangeHandler} onSubmit={handleSubmit} />
+         <p>Search Results for: "{userSearch}"</p>
+      </>
+   );
 };
