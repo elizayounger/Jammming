@@ -21,3 +21,25 @@
 .songName {
     font-weight: bold;
 }
+/* Basic styling for the SVG */
+svg {
+    width: 50px; /* Set desired width */
+    height: 50px; /* Set desired height */
+    fill: #5f6368; /* Set fill color */
+    transition: transform 0.3s, fill 0.3s; /* Smooth transition for hover effects */
+}
+/* Add a hover effect */
+svg:hover {
+    transform: scale(1.2); /* Slightly enlarge the icon on hover */
+    transition: none;
+    fill: green; /* Change color on hover */
+}
+/* Optional: Add shadow effect */
+svg {
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+svg:active {
+    transition: none;
+    fill: #34A853; /* Change to green when active (clicked) */
+    transform: scale(0.95); /* Slightly shrink the icon when clicked */
+}
