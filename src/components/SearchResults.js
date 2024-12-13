@@ -1,12 +1,12 @@
 import React from "react";
 import "./SearchResults.css";
-import Song from "./Song.js";
+import SongContainer from "../containers/SongContainer.js";
 
-export default function SearchResults({resultsList=[]}) {
+export default function SearchResults({searchResults=[], setNewPlaylist}) {
     
-    const songList = resultsList.map((song, index) => (
+    const songList = searchResults.map((song, index) => (
         <li key={index}>
-            <Song spotifyId={song.spotifyId} songName={song.songName} artist={song.artist} />
+            <SongContainer spotifyId={song.spotifyId} songName={song.songName} artist={song.artist} setNewPlaylist={setNewPlaylist} />
         </li>
     ));
 

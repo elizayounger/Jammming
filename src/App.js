@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from "./components/Header.js";
 import SearchbarContainer from "./containers/SearchBarContainer.js";
-import SearchResultsContainer from "./containers/SearchResultsContainer.js";
+import SearchResults from "./components/SearchResults.js";
 import PlaylistBuilderContainer from "./containers/PlaylistBuilderContainer.js";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
          < Header />
          < SearchbarContainer userSearch={userSearch} setUserSearch={setUserSearch} makeSearch={makeSearch} />
          <div className="resultsAndPlaylistContainer">
-            < SearchResultsContainer searchResults={searchResults} />
+            < SearchResults searchResults={searchResults} setNewPlaylist={setNewPlaylist} />
             < PlaylistBuilderContainer newPlaylist={newPlaylist} setNewPlaylist={setNewPlaylist} />
          </div>
       </div>
