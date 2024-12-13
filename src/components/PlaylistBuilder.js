@@ -1,12 +1,12 @@
 import React from "react";
 import "./PlaylistBuilder.css";
-import Song from "./Song.js";
+import SongContainer from "../containers/SongContainer.js";
 
-export default function PlaylistBuilder({ newPlaylistName, handlePlaylistNameChange, newPlaylist }) {
+export default function PlaylistBuilder({ newPlaylistName, handlePlaylistNameChange, newPlaylist, setNewPlaylist }) {
 
     const playlistItems = newPlaylist.map((song, index) => (
         <li key={index}>
-            <Song spotifyId={song.spotifyId} songName={song.songName} artist={song.artist} plusOperator={false} />
+            <SongContainer spotifyId={song.spotifyId} songName={song.songName} artist={song.artist} setNewPlaylist={setNewPlaylist} plusOperator={false} />
         </li>
     ));
 

@@ -8,7 +8,7 @@ export default function SongContainer({spotifyId, songName, artist, setNewPlayli
     function onAddClick(song) {
         setNewPlaylist(prev => [...prev, song]);
     }
-    function handleRemoveSongFromPlaylist(song) {
+    function onRemoveClick(song) {
         setNewPlaylist(prev => prev.filter(item => item.spotifyId !== song.spotifyId));
     }
     
@@ -16,7 +16,7 @@ export default function SongContainer({spotifyId, songName, artist, setNewPlayli
     return (<>
         {plusOperator ? 
             (< Song spotifyId={spotifyId} songName={songName} artist={artist} plusOperator={plusOperator} OnOperatorClick={onAddClick} />) : // with add song functionality
-            (< Song spotifyId={spotifyId} songName={songName} artist={artist} plusOperator={plusOperator} /*OnOperatorClick={handleRemoveSongFromPlaylist}*/ />) // with remove song functionality
+            (< Song spotifyId={spotifyId} songName={songName} artist={artist} plusOperator={plusOperator} OnOperatorClick={onRemoveClick} />) // with remove song functionality
         }
     </>);
 }

@@ -17,7 +17,7 @@ export default function Song({spotifyId, songName="SONG NAME", artist="Artist", 
 
         {plusOperator ? // if plusOperator true will return song with plus icon 
             (< AddIcon className="icon" onClick={() => OnOperatorClick({ spotifyId, songName, artist })} />) :
-            (< SubtractIcon className="icon" /*onClick={() => onRemoveClick({ spotifyId })}*/ />) // else subtract icon
+            (< SubtractIcon className="icon" onClick={() => OnOperatorClick({ spotifyId })} />) // else subtract icon
         }
     </div>);
 }
