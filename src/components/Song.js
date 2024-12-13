@@ -15,7 +15,7 @@ export default function Song({songName="SONG NAME", artist="Artist", plusOperato
             <p className="artist">{artist}</p>
         </div>
 
-        {plusOperator ? 
+        {plusOperator ? // if plusOperator true will return song with addSongCapabilites
             (<AddIcon className="icon" handleAddSongToPlaylist={OnOperatorClick}/>) :
             (<SubtractIcon className="icon"/>)
         }
