@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Searchbar from "../components/Searchbar.js";
+import { getSpotifySearch } from "../spotifyAPI.js";
 
 
 export default function SearchbarContainer({ userSearch , setUserSearch, makeSearch }) {
@@ -8,8 +9,14 @@ export default function SearchbarContainer({ userSearch , setUserSearch, makeSea
       setUserSearch(target.value);
    }
 
-   const handleSubmit = () => {
-      // call the api and input the 
+   const handleSubmit = async ({ searchQuery }) => {
+      try {
+         const searchQuery = "your search query here"; // Replace with an actual search query
+         const searchResults = await getSpotifySearch(searchQuery);
+         console.log(searchResults); // Already formatted track details
+      } catch (error) {
+         console.error(error);
+      }
       // makeSearch(searchAPI(userSearch));
       setUserSearch("");
    }

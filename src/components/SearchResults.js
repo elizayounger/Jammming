@@ -6,7 +6,7 @@ export default function SearchResults({searchResults=[], setNewPlaylist}) {
     
     const songList = searchResults.map((song, index) => (
         <li key={index}>
-            <SongContainer spotifyId={song.spotifyId} songName={song.songName} artist={song.artist} setNewPlaylist={setNewPlaylist} />
+            <SongContainer spotifyId={song.spotifyId} songName={song.songName} album={song.album} artist={song.artist} setNewPlaylist={setNewPlaylist} />
         </li>
     ));
 

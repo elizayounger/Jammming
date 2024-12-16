@@ -25,3 +25,5 @@ yarn-error.log*
 # Security
 src/spotifyAPI/auth.env
 src/spotifyAPI/auth.js
+
+src/archive/

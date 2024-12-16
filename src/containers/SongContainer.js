@@ -3,7 +3,7 @@ import React from 'react';
 import Song from "../components/Song.js";
 
 
-export default function SongContainer({spotifyId, songName, artist, setNewPlaylist, plusOperator=true}) {
+export default function SongContainer({spotifyId, songName, album, artist, setNewPlaylist, plusOperator=true}) {
     
     function onAddClick(song) {
         setNewPlaylist(prev => [...prev, song]);
@@ -15,8 +15,8 @@ export default function SongContainer({spotifyId, songName, artist, setNewPlayli
     
     return (<>
         {plusOperator ? 
-            (< Song spotifyId={spotifyId} songName={songName} artist={artist} plusOperator={plusOperator} OnOperatorClick={onAddClick} />) : // with add song functionality
-            (< Song spotifyId={spotifyId} songName={songName} artist={artist} plusOperator={plusOperator} OnOperatorClick={onRemoveClick} />) // with remove song functionality
+            (< Song spotifyId={spotifyId} songName={songName} album={album} artist={artist} plusOperator={plusOperator} OnOperatorClick={onAddClick} />) : // with add song functionality
+            (< Song spotifyId={spotifyId} songName={songName} album={album} artist={artist} plusOperator={plusOperator} OnOperatorClick={onRemoveClick} />) // with remove song functionality
         }
     </>);
 }
