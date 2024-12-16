@@ -101,11 +101,12 @@ export function extractTrackDetails(jsonResponse) {
   }
 
   const trackDetails = jsonResponse.tracks.items.map((item) => ({
-    id: item.id,
+    spotifyId: item.id,
     songName: item.name,
     album: item.album.name,
     artist: item.artists.map(artist => artist.name).join(", ")
   }));
+  console.log(`track id: ${trackDetails[0].spotifyId}`);
 
   return trackDetails;
 };
