@@ -1,30 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Searchbar from "../components/Searchbar.js";
-import { getSpotifySearch } from "../spotifyAPI.js";
+import { mockAPICall, getSpotifySearch } from "../spotifyAPI.js";
 
+export default function SearchbarContainer({ setSearchResults }) {
+   const [userSearchInput, setUserSearchInput] = useState(""); 
 
-export default function SearchbarContainer({ userSearch , setUserSearch, makeSearch }) {
+   const onChangeHandler = ({ target }) => {
+      setUserSearchInput(target.value);
+   };
 
-   const onChangeHandler = ({target}) => {
-      setUserSearch(target.value);
-   }
-
-   const handleSubmit = async ({ searchQuery }) => {
+   const handleSubmit = async (event) => {
+      event.preventDefault(); 
+      
+      setSearchResults([]);
       try {
-         const searchQuery = "your search query here"; // Replace with an actual search query
-         const searchResults = await getSpotifySearch(searchQuery);
-         console.log(searchResults); // Already formatted track details
+         if (!userSearchInput.trim()) {
+            console.warn("Search query is empty.");
+            return;
+         }
+         const results = await getSpotifySearch(userSearchInput); 
+         setSearchResults(results);
+         console.log(`results: ${results}`); // for debugging, remember to remove
+
       } catch (error) {
-         console.error(error);
+         console.error("Error fetching search results:", error);
       }
-      // makeSearch(searchAPI(userSearch));
-      setUserSearch("");
-   }
+      // const searchResultsFor = getElementById(); // change this so that only changes after submit
+   };
 
    return (
       <>
-         < Searchbar search={userSearch} changeHandler={onChangeHandler} onSubmit={handleSubmit} />
-         <p>Search Results for: "{userSearch}"</p>
+         <Searchbar
+            search={userSearchInput}
+            changeHandler={onChangeHandler}
+            onSubmit={handleSubmit}
+         />
+         {/* Display the current search term */}
+         <p>Search Results for: "{userSearchInput}"</p>
       </>
    );
-};
+}

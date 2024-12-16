@@ -65,7 +65,7 @@ export function extractAccessToken() {
 // --------------------Step 3: Submit Spotify Search -------------------------------
 export async function getSpotifySearch(search) {
   const accessToken = localStorage.getItem('access_token');
-  const params = "offset=0&limit=1&query=" + encodeURIComponent(search) + 
+  const params = "offset=0&limit=50&query=" + encodeURIComponent(search) + 
                  "&type=track&include_external=audio&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8";
   const url = 'https://api.spotify.com/v1/search?' + params;
 
@@ -85,9 +85,8 @@ export async function getSpotifySearch(search) {
     }
 
     const data = await response.json();
-
-    // Call the extractTrackDetails function to process the data
     return extractTrackDetails(data);
+    
   } catch (error) {
     console.error('Failed to fetch search results:', error);
     throw error; // Re-throw the error if needed
@@ -104,20 +103,9 @@ export function extractTrackDetails(jsonResponse) {
   const trackDetails = jsonResponse.tracks.items.map((item) => ({
     id: item.id,
     songName: item.name,
-    albumName: item.album.name,
+    album: item.album.name,
     artist: item.artists.map(artist => artist.name).join(", ")
   }));
 
   return trackDetails;
 };
-
-// Example usage:
-(async () => {
-  try {
-    const searchQuery = "your search query here"; // Replace with an actual search query
-    const searchResults = await getSpotifySearch(searchQuery);
-    console.log(searchResults); // Already formatted track details
-  } catch (error) {
-    console.error(error);
-  }
-})();

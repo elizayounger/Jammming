@@ -8,11 +8,11 @@ import { ReactComponent as PlayIcon } from '../resources/icons/playCircle.svg';
 export default function Song({spotifyId, songName="SONG NAME", album="Album", artist="Artist", plusOperator, OnOperatorClick }) {
 
     return (<div id={spotifyId} className="song">
-        < PlayIcon className="icon" /> 
+        {/* < PlayIcon className="icon" /> */}
 
         <div className="songDetails">
             <p className="songName">{songName}</p>
-            <p className="artist">{album}: {artist}</p>
+            <p className="artist">{album}: <em>{artist}</em></p>
         </div>
 
         {plusOperator ? // if plusOperator true will return song with plus icon 

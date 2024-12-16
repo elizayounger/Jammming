@@ -21,25 +21,26 @@
 .songName {
     font-weight: bold;
 }
-/* Basic styling for the SVG */
+.song.artist {
+    font-style: italic;
+}
+
 svg {
-    width: 10%; /* Set desired width */
+    width: 10%; 
     /* height: 50px;  */
-    fill: #5f6368; /* Set fill color */
-    transition: transform 0.3s, fill 0.3s; /* Smooth transition for hover effects */
+    fill: #5f6368; 
+    transition: transform 0.3s, fill 0.3s; 
 }
-/* Add a hover effect */
 svg:hover {
-    transform: scale(1.2); /* Slightly enlarge the icon on hover */
+    transform: scale(1.2); 
     transition: none;
-    fill: green; /* Change color on hover */
+    fill: green; 
 }
-/* Optional: Add shadow effect */
 svg {
     filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }
 svg:active {
     transition: none;
-    fill: #34A853; /* Change to green when active (clicked) */
-    transform: scale(0.95); /* Slightly shrink the icon when clicked */
+    fill: #34A853; 
+    transform: scale(0.95); 
 }
