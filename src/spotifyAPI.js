@@ -121,3 +121,16 @@ export function extractTrackDetails(jsonResponse) {
     console.error(error);
   }
 })();
+
+// ---------------------------------------------------------------------------------------
+
+export const mockAPICall = () => [
+  { spotifyId:"001", songName: "Hello", album: "25", artist: "Adele" },
+  { ispotifyId:"002", songName: "Mamma Mia", album: "ABBA Gold", artist: "Abba" },
+  { spotifyId:"003", songName: "Wagon Wheel", album: "BODEGA", artist: "Bodega" },
+  { spotifyId:"004", songName: "Save a horse ride a cowboy", album: "Horse of a Different Colour", artist: "Big & Rich" },
+  { spotifyId:"005", songName: "Heavy is the Crown", album: "Arcane League of Legends", artist: "Mike Shinoda" },
+  { spotifyId:"006", songName: "JOYRIDE", album: "KESHA", artist: "Kesha" },
+  { spotifyId:"007", songName: "Good Bi", album: "SINGLE", artist: "Beth McCarthy" },
+  { spotifyId:"008", songName: "Wide Open Spaces", album: "The Chicks", artist: "Dixie Chicks" },
+];

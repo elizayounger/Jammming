@@ -14,16 +14,13 @@ function App() {
    // window.onload = () => {
    // extractAccessToken();
    // };
-
-// -------------------------------------------User's Search-------------------------------------------
-
-   const [userSearch, setUserSearch] = useState("");
+   
 
 // -------------------------------------------Search Results (API)-------------------------------------------
    
-   const mockAPIList = [
+   const mockAPICall = () => [
       { spotifyId:"001", songName: "Hello", album: "25", artist: "Adele" },
-      { ispotifyIdd:"002", songName: "Mamma Mia", album: "ABBA Gold", artist: "Abba" },
+      { ispotifyId:"002", songName: "Mamma Mia", album: "ABBA Gold", artist: "Abba" },
       { spotifyId:"003", songName: "Wagon Wheel", album: "BODEGA", artist: "Bodega" },
       { spotifyId:"004", songName: "Save a horse ride a cowboy", album: "Horse of a Different Colour", artist: "Big & Rich" },
       { spotifyId:"005", songName: "Heavy is the Crown", album: "Arcane League of Legends", artist: "Mike Shinoda" },
@@ -32,7 +29,7 @@ function App() {
       { spotifyId:"008", songName: "Wide Open Spaces", album: "The Chicks", artist: "Dixie Chicks" },
    ];
 
-   const [searchResults, makeSearch] = useState([]);
+   const [searchResults, setSearchResults] = useState([]);
 
 // -------------------------------------------new Playlist-------------------------------------------
 
@@ -43,7 +40,7 @@ function App() {
    return (
       <div className="App">
          < Header />
-         < SearchbarContainer userSearch={userSearch} setUserSearch={setUserSearch} makeSearch={makeSearch} />
+         < SearchbarContainer /*userSearch={userSearch} setUserSearch={setUserSearch}*/ setSearchResults={setSearchResults} />
          <div className="resultsAndPlaylistContainer">
             < SearchResults searchResults={searchResults} setNewPlaylist={setNewPlaylist} />
             < PlaylistBuilderContainer newPlaylist={newPlaylist} setNewPlaylist={setNewPlaylist} />
