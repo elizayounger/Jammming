@@ -20,7 +20,7 @@ export default function SearchbarContainer({ setSearchResults }) {
          }
          const results = await getSpotifySearch(userSearchInput); 
          setSearchResults(results);
-         console.log(results); // for debugging, remember to remove
+         console.log(`results: ${results}`); // for debugging, remember to remove
 
       } catch (error) {
          console.error("Error fetching search results:", error);

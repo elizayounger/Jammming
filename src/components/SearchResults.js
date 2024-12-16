@@ -14,7 +14,7 @@ export default function SearchResults({searchResults=[], setNewPlaylist}) {
         <section className="searchResults">
             <div className="resultsTabs">
                 <button className="tab tabResults selected">SEARCH RESULTS</button>
-                {/* <button className="tab tabPlaylists">PLAYLISTS</button> */}
+                {/* <button className="tab tabPlaylists">PLAYLISTS</button> */} 
             </div>
 
             <div className="songResults">

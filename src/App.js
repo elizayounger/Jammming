@@ -10,10 +10,20 @@ function App() {
 
    // -------------------------------------------API Setup-------------------------------------------
 
-   // // Call this function on page load (in the callback page)
-   // window.onload = () => {
-   // extractAccessToken();
-   // };
+   useEffect(() => {
+      const handleSpotifyAuth = async () => {
+         extractAccessToken();
+         const token = localStorage.getItem('access_token');
+
+         if (!token) {
+            getAuthorization();
+         } else {
+            console.log('Spotify Access Token:', token);
+         }
+      };
+   
+      handleSpotifyAuth();
+   }, []);   
    
 
 // -------------------------------------------Search Results (API)-------------------------------------------
