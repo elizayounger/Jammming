@@ -4,28 +4,16 @@ import Header from "./components/Header.js";
 import SearchbarContainer from "./containers/SearchBarContainer.js";
 import SearchResults from "./components/SearchResults.js";
 import PlaylistBuilderContainer from "./containers/PlaylistBuilderContainer.js";
-import { getAuthorization, extractAccessToken } from './spotifyAPI.js';
+import { handleSpotifyAuth } from './spotifyAPI.js';
 
 function App() {
-
    // -------------------------------------------API Setup-------------------------------------------
 
    useEffect(() => {
-      const handleSpotifyAuth = async () => {
-         extractAccessToken();
-         const token = localStorage.getItem('access_token');
-
-         if (!token) {
-            getAuthorization();
-         } else {
-            console.log('Spotify Access Token:', token);
-         }
-      };
-   
+      console.log("handleSpotifyAuth() called from App.js");
       handleSpotifyAuth();
-   }, []);   
+   }, []);
    
-
 // -------------------------------------------Search Results (API)-------------------------------------------
    
    const mockAPICall = () => [

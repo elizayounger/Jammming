@@ -2,9 +2,9 @@ import React from 'react';
 import Button from "./Button.js";
 import "./Header.css";
 
-export default function Header() {
+export default function Header({ accessToken }) {
     return (<div className="Header">
         <h1>JAMMMING</h1>
-        < Button />
+        < Button accessToken={accessToken} />
     </div>);
 }

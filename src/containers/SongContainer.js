@@ -15,8 +15,20 @@ export default function SongContainer({spotifyId, songName, album, artist, setNe
     
     return (<>
         {plusOperator ? 
-            (< Song spotifyId={spotifyId} songName={songName} album={album} artist={artist} plusOperator={plusOperator} OnOperatorClick={onAddClick} />) : // with add song functionality
-            (< Song spotifyId={spotifyId} songName={songName} album={album} artist={artist} plusOperator={plusOperator} OnOperatorClick={onRemoveClick} />) // with remove song functionality
+            (< Song 
+                spotifyId={spotifyId} 
+                songName={songName} 
+                album={album} 
+                artist={artist} 
+                plusOperator={plusOperator} 
+                OnOperatorClick={onAddClick} />) : // with add song functionality
+            (< Song 
+                spotifyId={spotifyId} 
+                songName={songName} 
+                album={album} 
+                artist={artist} 
+                plusOperator={plusOperator} 
+                OnOperatorClick={onRemoveClick} />) // with remove song functionality
         }
     </>);
 }
