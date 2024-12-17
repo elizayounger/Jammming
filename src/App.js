@@ -4,14 +4,15 @@ import Header from "./components/Header.js";
 import SearchbarContainer from "./containers/SearchBarContainer.js";
 import SearchResults from "./components/SearchResults.js";
 import PlaylistBuilderContainer from "./containers/PlaylistBuilderContainer.js";
-import { handleSpotifyAuth } from './spotifyAPI.js';
+import { handleSpotifyAuth, fetchProfile } from './spotifyAPI.js';
 
 function App() {
    // -------------------------------------------API Setup-------------------------------------------
 
    useEffect(() => {
-      console.log("handleSpotifyAuth() called from App.js");
       handleSpotifyAuth();
+      const token = localStorage.getItem("access_token");
+      const profile = fetchProfile(token);
    }, []);
    
 // -------------------------------------------Search Results (API)-------------------------------------------
@@ -41,7 +42,11 @@ function App() {
          < SearchbarContainer /*userSearch={userSearch} setUserSearch={setUserSearch}*/ setSearchResults={setSearchResults} />
          <div className="resultsAndPlaylistContainer">
             < SearchResults searchResults={searchResults} setNewPlaylist={setNewPlaylist} />
-            < PlaylistBuilderContainer newPlaylist={newPlaylist} setNewPlaylist={setNewPlaylist} />
+            < PlaylistBuilderContainer 
+               newPlaylist={newPlaylist} 
+               setNewPlaylist={setNewPlaylist} 
+               setSearchResults={setSearchResults}
+            />
          </div>
       </div>
    );

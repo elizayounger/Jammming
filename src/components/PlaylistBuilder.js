@@ -2,7 +2,13 @@ import React from "react";
 import "./PlaylistBuilder.css";
 import SongContainer from "../containers/SongContainer.js";
 
-export default function PlaylistBuilder({ newPlaylistName, handlePlaylistNameChange, newPlaylist, setNewPlaylist }) {
+export default function PlaylistBuilder({ 
+        newPlaylistName, 
+        handlePlaylistNameChange, 
+        newPlaylist, 
+        setNewPlaylist ,
+        onSubmitPlaylist
+    }) {
 
     const playlistItems = newPlaylist.map((song, index) => (
         <li key={index}>
@@ -11,9 +17,9 @@ export default function PlaylistBuilder({ newPlaylistName, handlePlaylistNameCha
     ));
 
     return (<div className="playlistBuilder">
-
-        <form className="playlistNameInput">
-            <input className="playlistName"
+        <form className="playlistNameInput" onSubmit={onSubmitPlaylist}>
+            <input 
+                className="playlistName"
                 type="text" 
                 name="search" 
                 placeholder="Enter Playlist Name..."

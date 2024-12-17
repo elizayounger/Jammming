@@ -15,7 +15,6 @@ export function generateRandomString(length) {
 // --------------------Step 1: Get authorization -------------------------------
 
 export function getAuthorization() {
-   console.log("getAuthorization() called");
    const redirect_uri = 'http://localhost:3000'; // Your registered redirect URI
    const stateKey = 'spotify_auth_state'; // Key to store state in localStorage
    const state = generateRandomString(16); // Generate a random state string
@@ -33,8 +32,8 @@ export function getAuthorization() {
    window.location.href = url; // Redirect the user to the Spotify authorization page
 }
 // --------------------Step 2: Get Access Token  -------------------------------
+
 function extractAccessToken() {
-   console.log("extractAccessToken() called");
    const hash = window.location.hash; // Get the URL fragment (after #)
    const params = new URLSearchParams(hash.substring(1)); // Parse the fragment
    const accessToken = params.get('access_token'); // Extract the access token
@@ -49,7 +48,6 @@ function extractAccessToken() {
 
    if (accessToken) {
       localStorage.setItem('access_token', accessToken); // Store the token
-      console.log('Access token saved:', accessToken);
    } else {
       console.error('No access token found in the URL.');
    }
@@ -61,13 +59,23 @@ export function handleSpotifyAuth() {
    console.log("handleSpotifyAuth() called");
    extractAccessToken();
    const storedToken = localStorage.getItem('access_token');
-   console.log(`stored token: ${storedToken}`);
    if (!storedToken) {
       getAuthorization();
    }
 };
 
-// --------------------Step 3: Submit Spotify Search -------------------------------
+// --------------------Step 3: fetchProfile -------------------------------
+
+export async function fetchProfile(token) {
+   const result = await fetch("https://api.spotify.com/v1/me", {
+       method: "GET", headers: { Authorization: `Bearer ${token}` }
+   });
+
+   return await result.json();
+}
+
+
+// --------------------Step 4: Submit Spotify Search -------------------------------
 export async function getSpotifySearch(search) {
    const accessToken = localStorage.getItem('access_token');
    const params = "offset=0&limit=50&query=" + encodeURIComponent(search) + 
@@ -98,7 +106,7 @@ export async function getSpotifySearch(search) {
    }
 }
 
-// --------------------Step 4: Extract Track Details -------------------------------
+// --------------------Step 5: Extract Track Details -------------------------------
 
 export function extractTrackDetails(jsonResponse) {
    if (!jsonResponse || !jsonResponse.tracks || !jsonResponse.tracks.items) {
@@ -111,24 +119,22 @@ export function extractTrackDetails(jsonResponse) {
       album: item.album.name,
       artist: item.artists.map(artist => artist.name).join(", ")
    }));
-   console.log(`track id: ${trackDetails[0].spotifyId}`);
 
    return trackDetails;
 };
 
-// --------------------Step 5: Create New Playlist -------------------------------
+// --------------------Step 6: Create New Playlist -------------------------------
 
 export async function createSpotifyPlaylist(newPlaylistName) {
-  if (!newPlaylistName.trim()) {
+   console.log(`new playlist name: ${newPlaylistName}`);
+  if (!newPlaylistName) {
      console.warn("No new playlist name entered.");
      return;
   }
 
   const accessToken = localStorage.getItem('access_token');
   
-  if (!accessToken) {
-     throw new Error('Access token not found in local storage');
-  }
+  if (!accessToken) throw new Error('Access token not found in local storage');
 
   try {
      // Get the current user's ID from the /me endpoint
@@ -138,9 +144,7 @@ export async function createSpotifyPlaylist(newPlaylistName) {
         }
      });
 
-     if (!userResponse.ok) {
-        throw new Error(`Error fetching user data: ${userResponse.status} - ${userResponse.statusText}`);
-     }
+     if (!userResponse.ok) throw new Error(`Error fetching user data: ${userResponse.status} - ${userResponse.statusText}`);
 
      const userData = await userResponse.json();
      const userId = userData.id;  // User ID for the currently authenticated user
@@ -166,7 +170,7 @@ export async function createSpotifyPlaylist(newPlaylistName) {
      }
 
      const responseData = await response.json();
-     console.alert("New playlist created successfully!");
+     alert("New playlist created successfully!");
      return responseData; // Return the created playlist details if needed
   } catch (error) {
      console.error('Failed to create new playlist:', error);

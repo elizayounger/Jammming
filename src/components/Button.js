@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Button.css';
 import { handleSpotifyAuth } from "../spotifyAPI.js"; // Import extractAccessToken
 
 export default function Button() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);  // State to track if the user is logged in
 
-    // Function to check if user is logged in
+    useEffect(() => {
+        checkLoginStatus(); // check if user is logged in
+    }, []);
+
     const checkLoginStatus = () => {
         const storedToken = localStorage.getItem('access_token');
         if (storedToken) {
-            console.log("Token truthy, setIsLoggedIn.");
             setIsLoggedIn(true);
         } else {
-            console.log("Token falsy, setIsLoggedOut.");
             setIsLoggedIn(false);
         }
     };
@@ -20,10 +21,10 @@ export default function Button() {
     const handleClick = async () => {
         if (isLoggedIn) {
             localStorage.removeItem('access_token'); 
-            setIsLoggedIn(false);
+            checkLoginStatus();
         } else {
             handleSpotifyAuth();  // Call the getAuthorization function for login
-            setIsLoggedIn(true);  // Change state to show "LOGOUT" before redirection
+            checkLoginStatus();  // Change state to show "LOGOUT" before redirection
         }
     };
 
