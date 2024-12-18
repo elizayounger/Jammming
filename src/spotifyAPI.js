@@ -71,7 +71,54 @@ export function handleSpotifyAuth() {
 
 // --------------------Step 3: fetchProfile -------------------------------
 
-// TO DO
+export async function getProfile() {
+   console.log("getProfile called");
+   const token = localStorage.getItem('access_token'); // Assuming the access token is stored in localStorage
+   if (!token) {
+     throw new Error("Access token is missing");
+   }
+ 
+   const response = await fetch('https://api.spotify.com/v1/me', {
+     method: 'GET',
+     headers: {
+       'Authorization': `Bearer ${token}`,
+     },
+   });
+ 
+   if (!response.ok) {
+     const errorData = await response.json();
+     throw new Error(`Error fetching profile: ${errorData.error.message}`);
+   }
+ 
+   const profileData = await response.json();
+   const filteredProfile = storeProfile(profileData);
+   return filteredProfile;
+ };
+
+ function storeProfile(profileData) {
+   const allowed = ["display_name", "id", "uri"];
+   const filteredProfile = {};
+   for (const [key, value] of Object.entries(profileData)) {
+      if (allowed.includes(key)) {
+         filteredProfile[key] = value;
+      }
+   };
+   try {
+      localStorage.setItem('profileData', JSON.stringify(filteredProfile));
+   } catch (error) {
+      console.error('Error storing profile data:', error);
+   }
+   return filteredProfile;
+ };
+
+ function getUserId() {
+   const profileData = localStorage.getItem('profileData'); // get profile data
+   const parsedProfile = profileData ? JSON.parse(profileData) : null; // change from string to object
+   console.log(`profile data: ${JSON.stringify(parsedProfile)}`);
+   const userId = parsedProfile ? parsedProfile.id : null;  // if id exists, return else null
+   return userId;
+ };
+ 
 
 // --------------------Step 4: Submit Spotify Search -------------------------------
 
@@ -124,13 +171,14 @@ export function extractTrackDetails(jsonResponse) {
 // --------------------Step 6: Create New Playlist -------------------------------
 
 export async function createSpotifyPlaylist(newPlaylistName) {
+   getProfile();
    console.log(`new playlist name: ${newPlaylistName}`);
    if (!newPlaylistName) {
       console.warn("No new playlist name entered.");
       return;
    }
    const accessToken = localStorage.getItem('access_token');
-   const userId = "elizayounger";
+   const userId = getUserId();
    let isPublic = true;
    let isCollaborative = false;
    let description = "this playlist was made with the jammmin react app!";
