@@ -83,6 +83,7 @@ export function handleSpotifyAuth() {
 
 
 // --------------------Step 4: Submit Spotify Search -------------------------------
+
 export async function getSpotifySearch(search) {
    const accessToken = localStorage.getItem('access_token');
    const params = "offset=0&limit=50&query=" + encodeURIComponent(search) + 
@@ -92,7 +93,6 @@ export async function getSpotifySearch(search) {
    if (!accessToken) {
       throw new Error('Access token not found in local storage');
    }
-
    try {
       const response = await fetch(url, {
          headers: {
@@ -121,7 +121,7 @@ export function extractTrackDetails(jsonResponse) {
    }
 
    const trackDetails = jsonResponse.tracks.items.map((item) => ({
-      spotifyId: item.id,
+      spotifyId: item.uri,
       songName: item.name,
       album: item.album.name,
       artist: item.artists.map(artist => artist.name).join(", ")
@@ -166,7 +166,97 @@ export async function createSpotifyPlaylist(newPlaylistName) {
       const errorDetails = await response.json();
       throw new Error(`Error ${errorDetails.error.status}: ${errorDetails.error.message}`);
    }
-
    const playlistData = await response.json();
-   console.log("Playlist created successfully:", playlistData);
+   const storedData = storeNewPlaylist(playlistData);
+   alert(`Playlist "${newPlaylistName}" was created successfully`);
+
+   return storedData;
 };
+
+function filterNewPlaylistData(playlistData) {
+   const allowed = ["id", "name", "uri"];
+   const filteredData = {};
+   for (const [key, value] of Object.entries(playlistData)) {
+      if (allowed.includes(key)) {
+         filteredData[key] = value;
+      }
+   }
+   const tracksAllowed = ["total", "items"];
+   const filteredTracks = {};
+   for (const [key, value] of Object.entries(playlistData.tracks)) {
+      if (tracksAllowed.includes(key)) {
+         filteredTracks[key] = value;
+      }
+   }
+   filteredData["tracks"] = filteredTracks;
+
+   return filteredData;
+}
+
+function storeNewPlaylist(playlistData) {
+   const filteredPlaylistData = filterNewPlaylistData(playlistData);
+   console.log(`newPlaylistData: ${JSON.stringify(filteredPlaylistData)}`);
+
+   try {
+      if (!localStorage.getItem('newPlaylists')) {
+         localStorage.setItem('newPlaylists', JSON.stringify([]));
+      }
+      const playlists = JSON.parse(localStorage.getItem('newPlaylists'));
+      playlists.push(filteredPlaylistData);
+      localStorage.setItem('newPlaylists', JSON.stringify(playlists));
+   } catch (error) {
+      console.error('Error storing new playlist:', error);
+   }
+   return filteredPlaylistData;
+}
+
+// --------------------Step 7: Populate New Playlist with Selected Songs -------------------------------
+
+export async function populateNewPlaylist(playlist, tracks) {
+   const playlistId = playlist.id;
+   const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+   const accessToken = localStorage.getItem('access_token');
+   const requestBody = { uris: tracks.map(track => track.spotifyId) };
+
+   try {
+      const response = await fetch(url, {
+         method: "POST",
+         headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
+         },
+         body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+         const errorDetails = await response.json();
+         throw new Error(`Error ${errorDetails.error.status}: ${errorDetails.error.message}`);
+      }
+
+      const trackPopulationData = await response.json();
+      console.log(`Track population successful:`, trackPopulationData);
+
+   } catch (error) {
+      console.error("Error populating playlist:", error.message);
+      throw error;
+   }
+   const trackList = tracks
+   .map(track => `- ${track.songName} by ${track.artist} (Album: ${track.album})`)
+   .join("\n");
+
+   // Display the alert with the track list
+   alert(`Tracks successfully added to playlist "${playlist.name}":\n\n${trackList}`);
+
+}
+
+
+// {
+//    "id": "0eya1BmHvSlH8GcUP2Uwi4",
+//    "name": "good morning",
+//    "uri": "spotify:playlist:0eya1BmHvSlH8GcUP2Uwi4",
+//    "tracks": {
+//      "total": 0,
+//      "items": []
+//    }
+//  }
+ 

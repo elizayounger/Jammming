@@ -11,7 +11,6 @@ function App() {
 
    useEffect(() => {
       handleSpotifyAuth();
-      // fetchProfile();
    }, []);
    
 // -------------------------------------------Search Results (API)-------------------------------------------
