@@ -35,7 +35,7 @@ export default function SearchbarContainer({ setSearchResults }) {
             onSubmit={handleSubmit}
          />
          {/* Display the current search term */}
-         <p>Search Results for: "{userSearchInput}"</p>
+         {/* <p>Search Results for: "{userSearchInput}"</p> */}
       </>
    );
 }

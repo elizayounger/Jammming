@@ -71,16 +71,7 @@ export function handleSpotifyAuth() {
 
 // --------------------Step 3: fetchProfile -------------------------------
 
-// export async function fetchProfile(token) {
-//    const token = localStorage.getItem("access_token");
-
-//    const result = await fetch("https://api.spotify.com/v1/me", {
-//        method: "GET", headers: { Authorization: `Bearer ${token}` }
-//    });
-
-//    return await result.json();
-// }
-
+// TO DO
 
 // --------------------Step 4: Submit Spotify Search -------------------------------
 
@@ -244,19 +235,7 @@ export async function populateNewPlaylist(playlist, tracks) {
    .map(track => `- ${track.songName} by ${track.artist} (Album: ${track.album})`)
    .join("\n");
 
-   // Display the alert with the track list
    alert(`Tracks successfully added to playlist "${playlist.name}":\n\n${trackList}`);
 
-}
-
-
-// {
-//    "id": "0eya1BmHvSlH8GcUP2Uwi4",
-//    "name": "good morning",
-//    "uri": "spotify:playlist:0eya1BmHvSlH8GcUP2Uwi4",
-//    "tracks": {
-//      "total": 0,
-//      "items": []
-//    }
-//  }
+};
  

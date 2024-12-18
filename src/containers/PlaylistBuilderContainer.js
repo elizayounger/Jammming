@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PlaylistBuilder from "../components/PlaylistBuilder.js";
 import { createSpotifyPlaylist, populateNewPlaylist } from "../spotifyAPI.js";
 
-export default function PlaylistBuilderComponent({ newPlaylist, setNewPlaylist, setSearchResults }) {
+export default function PlaylistBuilderComponent({ newPlaylist, setNewPlaylist }) {
     
     const [newPlaylistName, setNewPlaylistName] = useState("");
 
@@ -14,7 +14,11 @@ export default function PlaylistBuilderComponent({ newPlaylist, setNewPlaylist, 
         event.preventDefault(); 
         const playlist = await createSpotifyPlaylist(newPlaylistName);
         console.log(`playlist: ${JSON.stringify(playlist)}`);
-        await populateNewPlaylist(playlist, newPlaylist);
+
+        if (newPlaylist.length !== 0) {
+            await populateNewPlaylist(playlist, newPlaylist);
+        };
+
         setNewPlaylistName("");
         setNewPlaylist([]);
     };

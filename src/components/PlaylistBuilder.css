@@ -30,6 +30,26 @@
     border: 1px solid green;
 }
 .add {
-    flex: 1;
+    flex: 2;
     color: green;
 }
+.greenButton {
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Add some padding */
+    font-size: 16px; /* Make the text a bit larger */
+    border: none; /* Remove the default border */
+    border-radius: 4px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .greenButton:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+  }
+  
+  .greenButton:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 4px #4caf50; /* Add a subtle glow when focused */
+  }
+  
