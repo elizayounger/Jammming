@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "chai": "^5.1.2",
     "jsdom": "^25.0.1",
     "mocha": "^11.0.1",
