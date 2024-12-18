@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Searchbar from "../components/Searchbar.js";
-import { mockAPICall, getSpotifySearch } from "../spotifyAPI.js";
+import { getSpotifySearch } from "../spotifyAPI.js";
 
 export default function SearchbarContainer({ setSearchResults }) {
    const [userSearchInput, setUserSearchInput] = useState(""); 

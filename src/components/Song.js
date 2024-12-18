@@ -2,7 +2,7 @@ import React from 'react';
 import "./Song.css";
 import { ReactComponent as AddIcon } from '../resources/icons/add.svg';
 import { ReactComponent as SubtractIcon } from '../resources/icons/remove.svg';
-import { ReactComponent as PlayIcon } from '../resources/icons/playCircle.svg';
+// import { ReactComponent as PlayIcon } from '../resources/icons/playCircle.svg';
 
 
 export default function Song({spotifyId, songName="SONG NAME", album="Album", artist="Artist", plusOperator, OnOperatorClick }) {
