@@ -15,7 +15,7 @@ export function generateRandomString(length) {
 // --------------------Step 1: Get authorization -------------------------------
 
 export function getAuthorization() {
-   const redirect_uri = 'http://localhost:3000'; // Your registered redirect URI
+   const redirect_uri = 'https://visionary-horse-ada9b5.netlify.app'; // Your registered redirect URI
    const stateKey = 'spotify_auth_state'; // Key to store state in localStorage
    const state = generateRandomString(16); // Generate a random state string
    localStorage.setItem(stateKey, state); // Save the state in localStorage to verify later
