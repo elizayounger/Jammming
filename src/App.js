@@ -11,8 +11,7 @@ function App() {
 
    useEffect(() => {
       handleSpotifyAuth();
-      const token = localStorage.getItem("access_token");
-      const profile = fetchProfile(token);
+      // fetchProfile();
    }, []);
    
 // -------------------------------------------Search Results (API)-------------------------------------------

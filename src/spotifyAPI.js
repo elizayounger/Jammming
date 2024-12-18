@@ -19,7 +19,12 @@ export function getAuthorization() {
    const stateKey = 'spotify_auth_state'; // Key to store state in localStorage
    const state = generateRandomString(16); // Generate a random state string
    localStorage.setItem(stateKey, state); // Save the state in localStorage to verify later
-   const scope = 'user-read-private user-read-email'; // Define the scopes your app needs
+   const scope = [
+      'user-read-private',         // Allows reading user profile info
+      'user-read-email',           // Allows reading user email
+      'playlist-modify-public',    // Required for creating/altering public playlists
+      'playlist-modify-private'    // Required for creating/altering private/collaborative playlists
+   ].join(' '); // Join the scopes as a space-separated string
 
    // Construct the Spotify authorization URL
    let url = 'https://accounts.spotify.com/authorize';
@@ -66,13 +71,15 @@ export function handleSpotifyAuth() {
 
 // --------------------Step 3: fetchProfile -------------------------------
 
-export async function fetchProfile(token) {
-   const result = await fetch("https://api.spotify.com/v1/me", {
-       method: "GET", headers: { Authorization: `Bearer ${token}` }
-   });
+// export async function fetchProfile(token) {
+//    const token = localStorage.getItem("access_token");
 
-   return await result.json();
-}
+//    const result = await fetch("https://api.spotify.com/v1/me", {
+//        method: "GET", headers: { Authorization: `Bearer ${token}` }
+//    });
+
+//    return await result.json();
+// }
 
 
 // --------------------Step 4: Submit Spotify Search -------------------------------
@@ -127,53 +134,39 @@ export function extractTrackDetails(jsonResponse) {
 
 export async function createSpotifyPlaylist(newPlaylistName) {
    console.log(`new playlist name: ${newPlaylistName}`);
-  if (!newPlaylistName) {
-     console.warn("No new playlist name entered.");
-     return;
-  }
+   if (!newPlaylistName) {
+      console.warn("No new playlist name entered.");
+      return;
+   }
+   const accessToken = localStorage.getItem('access_token');
+   const userId = "elizayounger";
+   let isPublic = true;
+   let isCollaborative = false;
+   let description = "this playlist was made with the jammmin react app!";
 
-  const accessToken = localStorage.getItem('access_token');
-  
-  if (!accessToken) throw new Error('Access token not found in local storage');
+   const url = `https://api.spotify.com/v1/users/${userId}/playlists`;
+   // playlist-modify-public
+   const requestBody = {
+      name: newPlaylistName,          // Playlist name
+      public: isPublic,            // Public or private
+      collaborative: isCollaborative, // Collaborative playlist
+      description: description     // Playlist description
+   };
 
-  try {
-     // Get the current user's ID from the /me endpoint
-     const userResponse = await fetch('https://api.spotify.com/v1/me', {
-        headers: {
-           Authorization: 'Bearer ' + accessToken
-        }
-     });
+   const response = await fetch(url, {
+      method: "POST",
+      headers: {
+         "Authorization": `Bearer ${accessToken}`, // Add OAuth token to request
+         "Content-Type": "application/json"  // Indicate JSON payload
+      },
+      body: JSON.stringify(requestBody) // Convert payload to JSON
+   });
 
-     if (!userResponse.ok) throw new Error(`Error fetching user data: ${userResponse.status} - ${userResponse.statusText}`);
+   if (!response.ok) {
+      const errorDetails = await response.json();
+      throw new Error(`Error ${errorDetails.error.status}: ${errorDetails.error.message}`);
+   }
 
-     const userData = await userResponse.json();
-     const userId = userData.id;  // User ID for the currently authenticated user
-
-     const url = `https://api.spotify.com/v1/users/${userId}/playlists`;
-     const data = {
-        name: newPlaylistName,
-        description: `${newPlaylistName} is created using the Jammming React app`,
-        public: false
-     };
-
-     const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-           'Authorization': 'Bearer ' + accessToken,
-           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-     });
-
-     if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-     }
-
-     const responseData = await response.json();
-     alert("New playlist created successfully!");
-     return responseData; // Return the created playlist details if needed
-  } catch (error) {
-     console.error('Failed to create new playlist:', error);
-     throw error;
-  }
+   const playlistData = await response.json();
+   console.log("Playlist created successfully:", playlistData);
 };
