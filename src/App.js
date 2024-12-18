@@ -4,7 +4,7 @@ import Header from "./components/Header.js";
 import SearchbarContainer from "./containers/SearchBarContainer.js";
 import SearchResults from "./components/SearchResults.js";
 import PlaylistBuilderContainer from "./containers/PlaylistBuilderContainer.js";
-import { handleSpotifyAuth, getProfile } from './spotifyAPI.js';
+import { handleSpotifyAuth } from './spotifyAPI.js';
 
 function App() {
 
